@@ -15,9 +15,9 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <scm>
-        <connection>scm:git:git@github.com:KazanExpress/activity-service.git</connection>
-        <developerConnection>scm:git:git@github.com:KazanExpress/activity-service.git</developerConnection>
-        <url>https://github.com/KazanExpress/activity-service.git</url>
+        <connection>scm:git:git@github.com:KazanExpress/activity-service-lib.git</connection>
+        <developerConnection>scm:git:git@github.com:KazanExpress/activity-service-lib.git</developerConnection>
+        <url>https://github.com/KazanExpress/activity-service-lib.git</url>
         <tag>HEAD</tag>
     </scm>
 
