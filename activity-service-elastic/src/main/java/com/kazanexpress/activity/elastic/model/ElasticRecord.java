@@ -22,6 +22,7 @@ public class ElasticRecord {
     @Id
     private String id;
     private String message;
+    private String type;
 
     @Field(type = FieldType.Object, includeInParent = true)
     private Map<String, ?> identifiers;
