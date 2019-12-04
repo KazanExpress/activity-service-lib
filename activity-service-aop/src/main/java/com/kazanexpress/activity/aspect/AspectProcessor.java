@@ -18,6 +18,8 @@ import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -31,6 +33,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import static java.util.Objects.requireNonNull;
+import static org.springframework.web.context.request.RequestAttributes.SCOPE_REQUEST;
 
 /**
  * Class to process methods which are marked by {@link ActivityRecord} annotation
@@ -111,23 +114,23 @@ public class AspectProcessor {
             subsMap.putAll(flattenMap(getIdentifiersMap(parameterObject, false)));
         }
 
-//        for (String nestedIdName : activityRecord.nestedRequestParams()) {
-//            RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-//            if (requestAttributes == null) {
-//                break;
-//            }
-//            Object nestedIdentifier = requestAttributes.getAttribute(nestedIdName, SCOPE_REQUEST);
-//            addIdentifiersForObject(nestedIdentifier, idMap, subsMap);
-//        }
-//        for (String key : activityRecord.requestParams()) {
-//            RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-//            if (requestAttributes == null) {
-//                break;
-//            }
-//            Object value = requestAttributes.getAttribute(key, SCOPE_REQUEST);
-//            addValue(idMap, key, value);
-//            subsMap.put(key, value);
-//        }
+        for (String nestedIdName : activityRecord.nestedRequestParams()) {
+            RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+            if (requestAttributes == null) {
+                break;
+            }
+            Object nestedIdentifier = requestAttributes.getAttribute(nestedIdName, SCOPE_REQUEST);
+            addIdentifiersForObject(nestedIdentifier, idMap, subsMap);
+        }
+        for (String key : activityRecord.requestParams()) {
+            RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+            if (requestAttributes == null) {
+                break;
+            }
+            Object value = requestAttributes.getAttribute(key, SCOPE_REQUEST);
+            addValue(idMap, key, value);
+            subsMap.put(key, value);
+        }
         addIdentifiersForObject(retVal, idMap, subsMap);
 
         Record event = Record.builder()
