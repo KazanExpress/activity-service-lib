@@ -16,7 +16,9 @@ import java.util.Map;
 @AllArgsConstructor
 @Builder
 @Data
-@Document(indexName = "activity-index", type = "record")
+@Document(indexName = "activity-index-#{T(java.time.LocalDate).now().toString()}",
+          createIndex = false,
+          type = "record")
 public class ElasticRecord {
 
     @Id
