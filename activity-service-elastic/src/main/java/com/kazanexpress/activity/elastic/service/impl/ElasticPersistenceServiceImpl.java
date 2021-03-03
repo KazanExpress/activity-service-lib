@@ -26,6 +26,7 @@ public class ElasticPersistenceServiceImpl implements PersistenceService {
         ElasticRecord elasticRecord = ElasticRecord.builder()
                 .id(record.getId())
                 .identifiers(new HashMap<>(record.getIdentifiers()))
+                .type(record.getType())
                 .message(record.getMessage())
                 .timestamp(record.getTimestamp())
                 .build();

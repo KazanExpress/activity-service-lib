@@ -16,12 +16,15 @@ import java.util.Map;
 @AllArgsConstructor
 @Builder
 @Data
-@Document(indexName = "activity-index", type = "record")
+@Document(indexName = "<activity-index-{now/d}>",
+          createIndex = false,
+          type = "record")
 public class ElasticRecord {
 
     @Id
     private String id;
     private String message;
+    private String type;
 
     @Field(type = FieldType.Object, includeInParent = true)
     private Map<String, ?> identifiers;
