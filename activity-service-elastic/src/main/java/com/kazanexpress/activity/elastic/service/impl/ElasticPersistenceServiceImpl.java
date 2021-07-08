@@ -32,6 +32,7 @@ public class ElasticPersistenceServiceImpl implements PersistenceService {
                 .build();
         log.debug("Send to Elastic...");
         elasticRepo.save(elasticRecord);
-        log.debug("Done: {}", elasticRepo.findById(elasticRecord.getId()));
+//        log.debug("Done: {}", elasticRepo.findById(elasticRecord.getId()));
+        log.debug("Done: {}", elasticRecord);
     }
 }
